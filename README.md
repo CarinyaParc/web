@@ -1,58 +1,85 @@
-# Turborepo Tailwind CSS starter
+# CarinyaParc/web
 
-This Turborepo starter is maintained by the Turborepo core team.
+This monorepo contains our farm website.
 
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest -e with-tailwind
-```
+- [carinyaparc.com.au](https://carinyaparc.com.au) - our farm website and blog
 
 ## What's inside?
 
-This Turborepo includes the following packages/apps:
+We're using [Turborepo](https://turbo.build/repo) to manage this monorepo because
+there's a lot going on.
 
-### Apps and Packages
+### apps/
 
-- `docs`: a [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `web`: another [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+Each directory in the apps folder is a separate website that we deploy. The name
+of the directory always corresponds to the domain name of the website:
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+- `sites/carinyaparc.com.au` is the website for the farm. It, and the
+  rest of sites, are built with [Next.js](https://nextjs.org/), [Sanity.io](https://sanity.io), [TailwindCSS.com](https://tailwindcss.com), and [shadcn/ui](https://ui.shadcn.com/).
 
-### Building packages/ui
+### packages/
 
-This example is set up to produce compiled styles for `ui` components into the `dist` directory. The component `.tsx` files are consumed by the Next.js apps directly using `transpilePackages` in `next.config.ts`. This was chosen for several reasons:
+The packages in this monorepo are reusable self-contained bits that we want to
+share across our apps and websites. Much of it is configuration for the different
+tools we use:
 
-- Make sharing one `tailwind.config.ts` to apps and packages as easy as possible.
-- Make package compilation simple by only depending on the Next.js Compiler and `tailwindcss`.
-- Ensure Tailwind classes do not overwrite each other. The `ui` package uses a `ui-` prefix for it's classes.
-- Maintain clear package export boundaries.
+- `packages/eslint-config`
+- `packages/tailwind-config`
+- `packages/typescript-config`
+- `packages/ui` is a React component library that contains any components that
+  we want to share across our websites. The package encompasses everything from
+  page layouts, UI building blocks, and complex widgets. We often use
+  [Shadcn](https://ui.shadcn.com) when looking to add new components, and we style
+  everything with [Tailwind](https://tailwindcss.com).
 
-Another option is to consume `packages/ui` directly from source without building. If using this option, you will need to update the `tailwind.config.ts` in your apps to be aware of your package locations, so it can find all usages of the `tailwindcss` class names for CSS compilation.
+## Getting started
 
-For example, in [tailwind.config.ts](packages/tailwind-config/tailwind.config.ts):
+To run any of the websites locally, you'll first need to install the dependencies
+and packages. We recommend using [pnpm](https://pnpm.io/) to manage your dependencies.
 
-```js
-  content: [
-    // app content
-    `src/**/*.{js,ts,jsx,tsx}`,
-    // include packages if not transpiling
-    "../../packages/ui/*.{js,ts,jsx,tsx}",
-  ],
+```sh
+pnpm install
 ```
 
-If you choose this strategy, you can remove the `tailwindcss` and `autoprefixer` dependencies from the `ui` package.
+If you take a peek in `package.json` you'll see we have a few different scripts
+to run our apps. If you just want to run everything at once, you can just do:
 
-### Utilities
+```sh
+pnpm run dev
+```
 
-This Turborepo has some additional tools already setup for you:
+For everything else, there is an individual script to run each app independently:
 
-- [Tailwind CSS](https://tailwindcss.com/) for styles
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- `pnpm run dev:reactflow.dev`
+
+
+
+
+---
+
+## Support our work
+
+React Flow and Svelte Flow are open-source MIT-licensed libraries, and it will
+be forever. Our libraries enable thousands of solo developers and organizations
+like Stripe and Linkedin to build their node-based apps. With so many active
+users, it takes time and effort to maintain the library, docs, and community.
+We can’t do that without your support.
+
+[<img src="./assets/readme-pro.png">](https://reactflow.dev/pro)
+
+Why Subscribe? With your subscription, you are ensuring the sustainable
+maintenance and development of both React Flow and Svelte Flow. This is how we
+make sure these libraries stay MIT-licensed. In return, you get high-quality,
+maintained, updated libraries, along with benefits like direct support,
+prioritized feature requests, and access to our Pro Examples.
+
+---
+
+## Contact us
+
+We're happy to try and answer any questions you have about our libraries. We're
+also always excited when folks want to share their projects with us. There are
+a few ways you can get in touch:
+
+- Use the contact form on our [website](https://#.com/contact).
+- Drop us an email at [info@x.com](mailto:info@x.com)
